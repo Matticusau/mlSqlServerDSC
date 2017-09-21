@@ -7,7 +7,7 @@ Set-Location 'C:\github';
 New-xDscResource -Name MSFT_xSqlServerStartupParam -FriendlyName xSqlServerStartupParam -ModuleName $moduleName -Path . -Force -Property @(
     New-xDscResourceProperty -Name SQLServer             -Type String           -Attribute Key -Description 'Hostname of the SQL Server to be configured'
     New-xDscResourceProperty -Name SQLInstanceName       -Type String           -Attribute Key -Description 'Name of the SQL Instance to be configured'
-    New-xDscResourceProperty -Name Ensure                -Type String           -Attribute Required -ValueMap 'Present','Absent' -Values 'Present','Absent'
+    New-xDscResourceProperty -Name Ensure                -Type String           -Attribute WRite -ValueMap 'Present','Absent' -Values 'Present','Absent'
     New-xDscResourceProperty -Name ParameterName         -Type String           -Attribute Required -Description 'The parameter to configure (e.g. -t, -d)'
     New-xDscResourceProperty -Name ParameterValue        -Type String           -Attribute Write -Description 'The value to set the parameter to'
 )
