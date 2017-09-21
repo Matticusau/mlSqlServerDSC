@@ -22,3 +22,36 @@ Update-xDscResource -Name MSFT_cSPN -FriendlyName cSPN -Force -Property @(
     New-xDscResourceProperty -Name DomainCredential      -Type PSCredential     -Attribute Write
     New-xDscResourceProperty -Name Ensure                -Type String           -Attribute Required -ValueMap 'Present','Absent' -Values 'Present','Absent'
 )
+
+
+
+# used to create the initial resource
+New-xDscResource -Name MSFT_xSqlServerDefaultDir -FriendlyName xSqlServerDefaultDir -ModuleName $moduleName -Path . -Force -Property @(
+    New-xDscResourceProperty -Name SQLServer             -Type String           -Attribute Key -Description 'Hostname of the SQL Server to be configured'
+    New-xDscResourceProperty -Name SQLInstanceName       -Type String           -Attribute Key -Description 'Name of the SQL Instance to be configured'
+    New-xDscResourceProperty -Name Ensure                -Type String           -Attribute WRite -ValueMap 'Present','Absent' -Values 'Present','Absent'
+    New-xDscResourceProperty -Name Name                  -Type String           -Attribute Key -Description 'The default setting to change' -ValueMap 'BackupDirectory','DefaultData','DefaultLog' -Values 'BackupDirectory','DefaultData','DefaultLog'
+    New-xDscResourceProperty -Name Path                  -Type String           -Attribute Write -Description 'The path to set as default'
+    New-xDscResourceProperty -Name RestartService        -Type Boolean           -Attribute Write -Description 'If set to true then the instance will be restarted after making the change'
+)
+
+
+# used to create the initial resource
+New-xDscResource -Name MSFT_xSqlServerDefaultDataRoot -FriendlyName xSqlServerDefaultDataRoot -ModuleName $moduleName -Path . -Force -Property @(
+    New-xDscResourceProperty -Name SQLServer             -Type String           -Attribute Key -Description 'Hostname of the SQL Server to be configured'
+    New-xDscResourceProperty -Name SQLInstanceName       -Type String           -Attribute Key -Description 'Name of the SQL Instance to be configured'
+    New-xDscResourceProperty -Name Ensure                -Type String           -Attribute WRite -ValueMap 'Present','Absent' -Values 'Present','Absent'
+    New-xDscResourceProperty -Name Path                  -Type String           -Attribute Write -Description 'The path to set as default'
+    New-xDscResourceProperty -Name RestartService        -Type Boolean           -Attribute Write -Description 'If set to true then the instance will be restarted after making the change'
+)
+
+# used to create the initial resource
+New-xDscResource -Name MSFT_xSqlServerMoveDatabaseFiles -FriendlyName xSqlServerMoveDatabaseFiles -ModuleName $moduleName -Path . -Force -Property @(
+    New-xDscResourceProperty -Name SQLServer             -Type String           -Attribute Key -Description 'Hostname of the SQL Server to be configured'
+    New-xDscResourceProperty -Name SQLInstanceName       -Type String           -Attribute Key -Description 'Name of the SQL Instance to be configured'
+    New-xDscResourceProperty -Name Ensure                -Type String           -Attribute WRite -ValueMap 'Present','Absent' -Values 'Present','Absent'
+    New-xDscResourceProperty -Name Database              -Type String           -Attribute Key -Description 'The database(s) to move files for'
+    New-xDscResourceProperty -Name DataPath              -Type String           -Attribute Write -Description 'The path to move data files'
+    New-xDscResourceProperty -Name LogPath               -Type String           -Attribute Write -Description 'The path to move trans log files'
+)
+

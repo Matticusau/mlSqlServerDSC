@@ -33,3 +33,67 @@ function Get-SqlInstanceMajorVersion
     return $sqlMajorVersionNumber
 }
 
+
+
+
+
+
+
+
+
+<#
+    .SYNOPSIS
+    Restarts a SQL Server instance and associated services.  Modified from helper function in xSqlServer
+    .PARAMETER SQLServer
+    Hostname of the SQL Server to be configured
+    .PARAMETER SQLInstanceName
+    Name of the SQL instance to be configured. Default is 'MSSQLSERVER'
+    .PARAMETER Timeout
+    Timeout value for restarting the SQL services. The default value is 120 seconds.
+    .EXAMPLE
+    Restart-SqlService -SQLServer localhost
+    .EXAMPLE
+    Restart-SqlService -SQLServer localhost -SQLInstanceName 'NamedInstance'
+    .EXAMPLE
+    Restart-SqlService -SQLServer CLU01 -Timeout 300
+#>
+function Restart-SqlService
+{
+    [CmdletBinding()]
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [System.String]
+        $SQLServer,
+
+        [Parameter()]
+        [System.String]
+        $SQLInstanceName = 'MSSQLSERVER',
+
+        [Parameter()]
+        [Int32]
+        $Timeout = 120
+    )
+
+    $sqlService = Get-Service -DisplayName "SQL Server ($SQLInstanceName)"
+
+    <#
+        Get all dependent services that are running.
+        There are scenarios where an automatic service is stopped and should not be restarted automatically.
+    #>
+    $agentService = $sqlService.DependentServices | Where-Object -FilterScript { $_.Status -eq 'Running' }
+
+    # Restart the SQL Server service
+    Write-Verbose -Message 'Restarting the service'
+    $sqlService | Restart-Service -Force
+
+    # Start dependent services
+    $agentService | ForEach-Object {
+        Write-Verbose -Message "Starting $_.DisplayName"
+        $_ | Start-Service
+    }
+    
+}
+
+
+
