@@ -69,3 +69,70 @@ Resource to set the default directories for data files, log files, or backup fil
 #### Examples
 
 * [Change the default data, log and backup directories](/Examples/SampleChangeDBDefaultDirs.ps1)
+
+
+### xSQLServerMoveDatabaseFiles
+
+Resource to move database files from one location to another. Designed with the purpose of relocating the databases from the default location to a custom location.
+
+#### Requirements
+
+* TBA
+
+#### Parameters
+
+* **`[String]` SQLServer** _(Key)_: The name of server hosting the sql instance to manage.
+* **`[String]` SQLInstanceName** _(Key)_: The SQL Server instance to manage.
+* **`[String[]]` Database** _(Key)_: The database(s) to move files for. Separate multiple databases with commas.
+* **`[String]` Ensure** _(Write)_: Included for consistency with other resources but esentially ignored.
+* **`[String]` DataPath** _(Write)_: The path to move data files.
+* **`[String]` LogPath** _(Write)_: The path to move trans log files.
+
+#### Examples
+
+* [Move the Model and Msdb databases from the default location](/Examples/SampleMoveDbFiles.ps1)
+
+### xSQLServerSQLDataRoot
+
+ Resource to set the data root which is critical if you move the master database location after installation. 
+
+ The importance of this setting is explained in https://docs.microsoft.com/en-us/sql/relational-databases/databases/move-system-databases
+> At this point SQL Server should run normally. However Microsoft recommends also adjusting the registry entry at HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\instance_ID\Setup, where instance_ID is like MSSQL13.MSSQLSERVER. In that hive, change the SQLDataRoot value to the new path. Failure to update the registry can cause patching and upgrading to fail.
+
+#### Requirements
+
+* TBA
+
+#### Parameters
+
+* **`[String]` SQLServer** _(Key)_: The name of server hosting the sql instance to manage.
+* **`[String]` SQLInstanceName** _(Key)_: The SQL Server instance to manage.
+* **`[String]` Ensure** _(Write)_: Included for consistency with other resources but esentially ignored.
+* **`[String]` Path** _(Write)_: The path to set as default.
+* **`[Boolean]` RestartService** _(Write)_: If $true will restart the server if the setting is changed. Allows you to minimise 
+
+#### Examples
+
+* TBA
+
+
+### xSQLServerStartUpParam
+
+Resource to manage the start up parameters of a SQL Server Instance. This can include traceflags and also setting the location of the master data and log files or the error log fle.
+
+#### Requirements
+
+* TBA
+
+#### Parameters
+
+* **`[String]` SQLServer** _(Key)_: The name of server hosting the sql instance to manage.
+* **`[String]` SQLInstanceName** _(Key)_: The SQL Server instance to manage.
+* **`[String]` ParameterName** _(Key)_: The parameter to configure (e.g. -t, -d).
+* **`[String]` Ensure** _(Write)_: Included for consistency with other resources but esentially ignored.
+* **`[String]` ParameterValue** _(Write)_: The value to set the parameter to.
+
+#### Examples
+
+* TBA
+
