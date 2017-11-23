@@ -4,8 +4,7 @@ The **mlSQLServerDSC** module is a complimentary DSC Module to add resources and
 
 ## Installation
 
-To manually install the module, download the source code and unzip the contents directory to the
-'$env:ProgramFiles\WindowsPowerShell\Modules\mlSqlServerDSC' folder.
+To manually install the module, download the source code and unzip the contents directory to the '$env:ProgramFiles\WindowsPowerShell\Modules\mlSqlServerDSC' folder.
 
 To install from the PowerShell gallery using PowerShellGet (in PowerShell 5.0) run
 the following command:
@@ -96,7 +95,7 @@ Resource to move database files from one location to another. Designed with the 
 
 ### xSQLServerSQLDataRoot
 
- Resource to set the data root which is critical if you move the master database location after installation. 
+ Resource to set the data root which is critical if you move the master database location after installation.
 
  The importance of this setting is explained in https://docs.microsoft.com/en-us/sql/relational-databases/databases/move-system-databases
 > At this point SQL Server should run normally. However Microsoft recommends also adjusting the registry entry at HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\instance_ID\Setup, where instance_ID is like MSSQL13.MSSQLSERVER. In that hive, change the SQLDataRoot value to the new path. Failure to update the registry can cause patching and upgrading to fail.
@@ -111,7 +110,7 @@ Resource to move database files from one location to another. Designed with the 
 * **`[String]` SQLInstanceName** _(Key)_: The SQL Server instance to manage.
 * **`[String]` Ensure** _(Write)_: Included for consistency with other resources but esentially ignored.
 * **`[String]` Path** _(Write)_: The path to set as default.
-* **`[Boolean]` RestartService** _(Write)_: If $true will restart the server if the setting is changed. Allows you to minimise 
+* **`[Boolean]` RestartService** _(Write)_: If $true will restart the server if the setting is changed. Allows you to minimise
 
 #### Examples
 
