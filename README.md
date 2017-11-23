@@ -48,6 +48,8 @@ A full list of changes in each version can be found in the [change log](CHANGELO
   sets the data root which is critical if you move the master database location after installation.
 * [**xSQLServerStartupParam**](#xsqlserverstartupparam)
   resource to manage the startup parameters for the SQL Server Data Engine.
+* [**xSQLServerTempDB**](#xsqlservertempdb)
+  resource to manage the tempdb configuration (e.g. number of file) - *in development*
 
 ### xSQLServerDefaultDir
 
@@ -136,3 +138,20 @@ Resource to manage the start up parameters of a SQL Server Instance. This can in
 
 * TBA
 
+### xSQLServerTempDB - unreleased
+
+Resource to configure the TempDB in accordance to best practices. The SQL 2016 install wizard now sets this, however this resource will be used to retrofit older releases or post install configuration.
+
+Resource is still in development and *unreleased*
+
+#### Requirements
+
+* TBA
+
+#### Parameters
+
+* TBA
+
+#### Examples
+
+* TBA
