@@ -55,3 +55,14 @@ New-xDscResource -Name MSFT_xSqlServerMoveDatabaseFiles -FriendlyName xSqlServer
     New-xDscResourceProperty -Name LogPath               -Type String           -Attribute Write -Description 'The path to move trans log files'
 )
 
+
+
+# used to create the initial resource
+New-xDscResource -Name MSFT_xSqlServerTempDb -FriendlyName xSqlServerTempDb -ModuleName $moduleName -Path . -Force -Property @(
+    New-xDscResourceProperty -Name SQLServer             -Type String           -Attribute Key -Description 'Hostname of the SQL Server to be configured'
+    New-xDscResourceProperty -Name SQLInstanceName       -Type String           -Attribute Key -Description 'Name of the SQL Instance to be configured'
+    New-xDscResourceProperty -Name Ensure                -Type String           -Attribute Write -ValueMap 'Present','Absent' -Values 'Present','Absent'
+    New-xDscResourceProperty -Name DynamicAlloc          -Type Boolean          -Attribute Write -Description 'If the number of files should be dynamically set'
+    New-xDscResourceProperty -Name DataFileCount         -Type Uint32           -Attribute Write -Description 'The number of Data files to set on TempDb'
+)
+
